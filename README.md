@@ -1,7 +1,7 @@
 # fetch-simulator
 Lightweight module for simulation of HTTP requests with the fetch API.
 
-### Installation:
+## Installation
 
 #### ReactJS & NodeJS
 ```bash
@@ -13,4 +13,4 @@ For testing purposes, you can link this library to your HTML via CDN (not real C
 ```html
 <script src="http://cdn.dejansandic.com/js/fetch-simulator.js" type="text/javascript"></script>
 ```
-Download <a href="http://cdn.dejansandic.com/js/fetch-simulator.zip">static.js</a> file for the production purposes.<br /><br /><br />
+Download <a href="http://cdn.dejansandic.com/js/fetch-simulator.zip">fetch-simulator.js</a> file for the production purposes.<br /><br /><br />
