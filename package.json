@@ -1,0 +1,11 @@
+{
+  "name": "fetch-simulator",
+  "version": "1.0.1",
+  "description": "Module for simulation of http requests with fetch API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Dejan Sandic - dejansandic.com",
+  "license": "MIT"
+}
