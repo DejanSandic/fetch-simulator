@@ -1,7 +1,7 @@
 {
   "name": "fetch-simulator",
   "version": "1.0.2",
-  "description": "Module for simulation of http requests with fetch API",
+  "description": "Lightweight module for simulation of HTTP requests with the fetch API",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,6 +12,7 @@
   },
   "keywords": [
     "fetch",
+    "fetch-api",
     "simulator",
     "test",
     "http",
