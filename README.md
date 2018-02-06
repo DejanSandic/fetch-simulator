@@ -1,5 +1,8 @@
 # fetch-simulator
 Lightweight module for simulation of HTTP requests with the fetch API.
+<br />
+
+With fetch-simulator you can simulate server responses without modifying you fetch API calls. This is really useful during development process when you don't want to make real HTTP requests to stress your server, or if you don't have server yet but you work on part of your app which depends of the server response. You don't have to replace your fetch calls with some kind of test functions, just import fetch-simulator and you can use it. When you are ready to connect to the real server, you just remove it from your project.
 
 ## Installation
 
