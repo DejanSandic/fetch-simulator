@@ -118,7 +118,7 @@ fetch('/user', {method: POST})
     //}
 ```
 
-## Delaying the response
+### Delaying the response
 Usually when we are making HTTP requests, we don't get server's response right away. Usually there is delay which could last even for few seconds. To simulate this behavior, you can set the time it would take for your fetch call to receive data. We do this with the 'wait' parameter:
 ```js
 fetch.addRoute('/user', {
@@ -138,3 +138,5 @@ Fetch Simulator has default maximum wait limit at 20 seconds or 20000 ms. If you
 fetch.setTimeout(50000) // Limit is now 50 seconds
 fetch.setTimeout(1000) // Limit is now 1 second
 ```
+
+### Additional response properties
