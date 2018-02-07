@@ -110,7 +110,7 @@ fetch('/user')
 ```
 Since we didn't specified HTTP method, this fetch request is automatically set to use GET method. To switch to POST request we just need to add POST method to our fetch call, just like we would do while making POST request to the real server.
 ```js
-fetch('/user', {method: POST})
+fetch('/user', {method: 'POST'})
     .then((res) => res.json())
     .then((res) => console.log(res));
     // Response in this case would be:
@@ -184,7 +184,88 @@ In this case if we make GET request, response will look like this:
 but if we make POST request on the same route, response will look like this:
 ```js
 {
-    response: 'New user has been created',
+    response: {
+        message: 'New user has been created',
+        user: {name: 'Jane', lastName: 'Doe'}
+    },
     status: 200,
     statusText: 'OK'
 }
+```
+<br />
+
+## Removing routes
+If by any chance you want to remove any of the routes you created, you can do that with .removeRoute() method.
+```js
+fetch.removeRoute('/users');
+```
+<br />
+
+### Creating and importing external routes
+It would be really messy if you would create routes in the same file in which you use your fetch calls. With Fetch Simulator, you can create routes in one file, export them, then import and use them in other file.
+Next example shows how we can create separate routes file and use it in our react app.
+```js
+// FILE NAME = routes.js
+
+import Fetch from 'fetch-js';
+
+Fetch.addRoute('/users', {
+    response: {
+        get: ['John Doe', 'Jand Doe', 'Bruce Wayne']
+    }
+    expect: {
+        get: {status: 200, statusText: 'OK'}
+    },
+    wait: 3000
+});
+
+Fetch.addRoute('/user', {
+    response: {
+        post: {
+            message: 'New user created',
+            user: 'Mr Spock'
+        }
+    }
+    expect: {
+        post: {status: 200, statusText: 'OK'}
+    }
+});
+
+
+let routes = Fetch.getRoutes();
+
+export default routes;
+```
+Notice how we used Fetch.getRoutes() to create a copy of our routes object and store it to the variable. We exported that variable so we can import and use it in other file. After we import the routes, we can pass them to our fetch system by using Fetch.setRoutes().
+```js
+// FILE NAME = index.js
+
+import React, { Component } from 'react';
+import Fetch from 'fetch-simulator';
+import myRoutes from 'routes.js';
+
+Fetch.setRoutes(myRoutes);
+Fetch.use();
+
+class Test extends Component () {
+    constructor(props){
+        super(props);
+        this.state = {name: 'Batman'};
+    }
+
+    componentDidMount(){
+        fetch('/users', {method: 'POST'})
+            .then((res) => res.json())
+            .then((res) => {
+                this.setState({
+                    name: res[2]
+                });
+            });
+    }
+    
+    render(){
+        return <h1>{this.state.name}</h1>;
+    }
+}
+```
+In this case text of the h1 tag will be 'Batman', but after 3 seconds when fetch completes, text will be changed to 'Bruce Wayne'.
