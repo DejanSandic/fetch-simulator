@@ -121,7 +121,7 @@ fetch('/user', {method: POST})
 ```
 
 #### Delaying the response
-Usually when we are making HTTP requests, we don't get server's response right away. Usually there is delay which could last even for few seconds. To simulate this behavior, you can set the time it would take for your fetch call to receive data. We do this with the 'wait' parameter:
+Usually when we are making HTTP requests, we don't get server's response right away. Usually there is delay which could last even for few seconds. To simulate this behavior, you can set the time it would take for your fetch call to receive data. We do this with the 'wait' property:
 ```js
 fetch.addRoute('/user', {
     response: {
@@ -142,3 +142,31 @@ fetch.setTimeout(1000) // Limit is now 1 second
 ```
 
 #### Additional response properties
+Sometimes your logic in side of the fetch call depends on certin expected parameters on the response object, for example:
+```js
+fetch('/users')
+    .then((res) => {
+        if (res.status === 200) {
+            return res.json();
+        } else {
+            throw new Error('Oh nooooooooooo');
+        }
+    });
+```
+To simulate this behavior, you can use set expected property's on the response object. We do this with the 'expect' property:
+```js
+fetch.addRoute('/user', {
+    response: {
+      get: '',
+      post: {
+          message: 'New user has been created',
+          user: {name: 'Jane', lastName: 'Doe'}
+      }
+    },
+    expect: {
+      get: {status: 404, error: 'That user is not found in the database'},
+      post: {status: 200, statusText: 'OK'}
+    },
+    wait: 5000
+});
+```
