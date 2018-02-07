@@ -11,19 +11,20 @@ With the Fetch Simulator you can simulate server responses without modifying you
 npm install fetch-simulator --save-dev
 ```
 
-### ReactJS
+#### ReactJS
 In ReactJS we can import Fetch Simulator and store it to the Fetch variable. After that, we can use Fetch.use() method which will then replace the fetch API in the browser with the one from Fetch Simulator.
 ```js
 import Fetch from 'fetch-simulator';
 Fetch.use();
 ```
 
-### NodeJS
+#### NodeJS
 Since NodeJS doesn't support the fetch API natively, we can simply require fetch-simulator and store it in the fetch variable.
 ```js
 const fetch = require('fetch-simulator');
 ```
 
+<br />
 ## How does it work?
 Lets say you are using fetch API to fetch some data from the geocode server with the GET request. Your code would look like this:
 ```js
@@ -83,6 +84,7 @@ fetch('https://somekindofserver.com/location/miami')
   });
 ```
 
+<br />
 ## Creating new routes
 In order for the Fetch Simulator to get the response from specific route, we first need to create that route and response it will send.
 ```js
@@ -118,7 +120,7 @@ fetch('/user', {method: POST})
     //}
 ```
 
-### Delaying the response
+#### Delaying the response
 Usually when we are making HTTP requests, we don't get server's response right away. Usually there is delay which could last even for few seconds. To simulate this behavior, you can set the time it would take for your fetch call to receive data. We do this with the 'wait' parameter:
 ```js
 fetch.addRoute('/user', {
@@ -139,4 +141,4 @@ fetch.setTimeout(50000) // Limit is now 50 seconds
 fetch.setTimeout(1000) // Limit is now 1 second
 ```
 
-### Additional response properties
+#### Additional response properties
