@@ -151,6 +151,9 @@ fetch('/users')
         } else {
             throw new Error('Oh nooooooooooo');
         }
+    })
+    .catch((error) => {
+        console.log(error);
     });
 ```
 To simulate this behavior, you can use set expected property's on the response object. We do this with the 'expect' property:
@@ -170,3 +173,18 @@ fetch.addRoute('/user', {
     wait: 5000
 });
 ```
+In this case if we make GET request, response will look like this:
+```js
+{
+    response: '',
+    status: 404,
+    error: 'That user is not found in the database'
+}
+```
+but if we make POST request on the same route, response will look like this:
+```js
+{
+    response: 'New user has been created',
+    status: 200,
+    statusText: 'OK'
+}
