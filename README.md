@@ -43,7 +43,11 @@ we can simulate this response with fetch-simulator and return the same result:
 ```js
 const fetch = require('fetch-simulator');
 
-fetch.addRoute('https://somekindofserver.com/location/miami', {response: 'Miami, Florida, USA'});
+fetch.addRoute('https://somekindofserver.com/location/miami', {
+    response: {
+        get: 'Miami, Florida, USA'
+    }
+});
 
 fetch('https://somekindofserver.com/location/miami')
   .then((response) => {
@@ -56,3 +60,38 @@ fetch('https://somekindofserver.com/location/miami')
   // Now we will get the same result, but this time from the route we created - Miami, Florida, USA
 ```
 You noticed we called .json() method on our responce, but we didnt set it, this is because fetch-simulator automatically adds this method to our response, more about this you can read in the methods section.
+
+## Creating new routes
+In order for the fetch-simulator to get the response from specific route, we first need to create that route and response it will send.
+```js
+const fetch = require('fetch-simulator');
+
+fetch.addRoute('/user', {
+    response: {
+      get: {name: 'John', lastName: 'Doe'},
+      post: {
+          message: 'New user has been created',
+          user: {name: 'Jane', lastName: 'Doe'}
+      }
+    }
+});
+```
+Now we can fetch that data from the '/user' route either with GET method or POST method.
+```js
+fetch('/user')
+    .then((res) => res.json())
+    .then((res) => console.log(res));
+    // Response in this case would be:
+    // {name: 'John', lastName: 'Doe'}
+```
+Since we didn't specified HTTP method, this fetch request is automatically set to use GET method. To switch to POST request we just need to add POST method to our fetch call, just like we would do while making POST request to the real server.
+```js
+fetch('/user', {method: POST})
+    .then((res) => res.json())
+    .then((res) => console.log(res));
+    // Response in this case would be:
+    //{
+    //    message: 'New user has been created',
+    //    user: {name: 'Jane', lastName: 'Doe'}
+    //}
+```
