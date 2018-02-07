@@ -10,7 +10,6 @@ With the Fetch Simulator you can simulate server responses without modifying you
 ```bash
 npm install fetch-simulator --save-dev
 ```
-<br />
 
 ### ReactJS
 In ReactJS we can import Fetch Simulator and store it to the Fetch variable. After that, we can use Fetch.use() method which will then replace the fetch API in the browser with the one from Fetch Simulator.
@@ -18,7 +17,6 @@ In ReactJS we can import Fetch Simulator and store it to the Fetch variable. Aft
 import Fetch from 'fetch-simulator';
 Fetch.use();
 ```
-<br />
 
 ### NodeJS
 Since NodeJS doesn't support the fetch API natively, we can simply require fetch-simulator and store it in the fetch variable.
@@ -40,6 +38,7 @@ fetch('https://somekindofserver.com/location/miami')
   // Lets say in this case response is - Miami, Florida, USA
 ```
 We can simulate this response with Fetch Simulator and return the same result.
+
 #### NodeJS
 ```js
 const fetch = require('fetch-simulator');
