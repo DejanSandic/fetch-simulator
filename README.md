@@ -23,8 +23,8 @@ Since NodeJS doesn't support the fetch API natively, we can simply require fetch
 ```js
 const fetch = require('fetch-simulator');
 ```
-
 <br />
+
 ## How does it work?
 Lets say you are using fetch API to fetch some data from the geocode server with the GET request. Your code would look like this:
 ```js
@@ -83,8 +83,8 @@ fetch('https://somekindofserver.com/location/miami')
       console.log(response);
   });
 ```
-
 <br />
+
 ## Creating new routes
 In order for the Fetch Simulator to get the response from specific route, we first need to create that route and response it will send.
 ```js
