@@ -63,7 +63,7 @@ fetch('https://somekindofserver.com/location/miami')
 You noticed we called .json() method on our responce, but we didnt set it, this is because Fetch Simulator automatically adds this method to our response, more about this you can read in the methods section.
 
 #### ReactJS
-Using Fetch Simulator in the React or other front end library's is little bit different. Since React already has fetch API, we need to override it. For that reason we import Fetch Simulator wit capital F, and after that we can replace original fetch wit .use() method.
+Using Fetch Simulator in the React or other front end library's is little bit different. Since React already has fetch API, we need to override it. For that reason we import Fetch Simulator wit capital F, and after that we can replace original fetch with .use() method.
 ```js
 import Fetch from fetch-simulator;
 
