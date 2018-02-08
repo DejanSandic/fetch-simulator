@@ -1,10 +1,24 @@
 # fetch-simulator
 Lightweight module for simulation of HTTP requests with the fetch API.
+<br /><br />
+
+#### Topics:
+- [Description](#description)
+- [Installation](#installation)
+- [How does it work?](#how-does-it-work)
+- [Creating new routes](#creating-new-routes)
+- [Creating and importing external routes](#external-routes)
+
+
 <br />
 
+<a id="description"></a>
 ## Description
 With the Fetch Simulator you can simulate server responses without modifying you fetch API calls. This is really useful during development process when you don't want to make real HTTP requests to stress your server, or if you don't have server yet but you work on part of your app which depends of the server response. You can set exact data you want to receive from your simulated server as well as the time you want to wait to get your response. You don't have to replace your fetch calls with some kind of test functions, just import Fetch Simulator and you can use it. When you are ready to connect to the real server, you just remove it from your project.
 
+<br />
+
+<a id="installation"></a>
 ## Installation
 
 ```bash
@@ -25,6 +39,8 @@ const fetch = require('fetch-simulator');
 ```
 <br />
 
+
+<a id="how-does-it-work"></a>
 ## How does it work?
 Lets say you are using fetch API to fetch some data from the geocode server with the GET request. Your code would look like this:
 ```js
@@ -85,6 +101,8 @@ fetch('https://somekindofserver.com/location/miami')
 ```
 <br />
 
+
+<a id="creating-new-routes"></a>
 ## Creating new routes
 In order for the Fetch Simulator to get the response from specific route, we first need to create that route and response it will send.
 ```js
@@ -194,6 +212,8 @@ but if we make POST request on the same route, response will look like this:
 ```
 <br />
 
+
+<a id="removing-routes"></a>
 ## Removing routes
 If by any chance you want to remove any of the routes you created, you can do that with .removeRoute() method.
 ```js
@@ -201,7 +221,9 @@ fetch.removeRoute('/users');
 ```
 <br />
 
-### Creating and importing external routes
+
+<a id="external-routes"></a>
+## Creating and importing external routes
 It would be really messy if you would create routes in the same file in which you use your fetch calls. With Fetch Simulator, you can create routes in one file, export them, then import and use them in other file.
 Next example shows how we can create separate routes file and use it in our react app.
 ```js
