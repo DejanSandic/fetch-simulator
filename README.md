@@ -7,6 +7,7 @@ Lightweight module for simulation of HTTP requests with the fetch API.
 - [Installation](#installation)
 - [How does it work?](#how-does-it-work)
 - [Creating new routes](#creating-new-routes)
+- [Removing Routes](#removing-routes)
 - [Creating and importing external routes](#external-routes)
 
 
