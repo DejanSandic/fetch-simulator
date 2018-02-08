@@ -242,7 +242,7 @@ Notice how we used Fetch.getRoutes() to create a copy of our routes object and s
 
 import React, { Component } from 'react';
 import Fetch from 'fetch-simulator';
-import myRoutes from 'routes.js';
+import myRoutes from './routes.js';
 
 Fetch.setRoutes(myRoutes);
 Fetch.use();
@@ -269,3 +269,30 @@ class Test extends Component () {
 }
 ```
 In this case text of the h1 tag will be 'Batman', but after 3 seconds when fetch completes, text will be changed to 'Bruce Wayne'.
+
+<br />
+
+In this example we used Fetch.setRoutes() to pass our previously created routes to the Fetch Simulator, and after that we used Fetch.use() to replace the fetch API with our Fetch Simulator. We can simplify this by passing our previously created routes directly to Fetch.use() and that way we don't have to use Fetch.setRoutes().
+```js
+import Fetch from 'fetch-simulator';
+import myRoutes from './routes.js';
+
+Fetch.use(myRoutes);
+
+// THIS IS THE SAME AS
+
+import Fetch from 'fetch-simulator';
+import myRoutes from './routes.js';
+
+Fetch.setRoutes(myRoutes);
+Fetch.use();
+```
+
+#### Important Note
+In the NodeJS we don't have to use Fetch.use() since there is no fetch API to replace by default. So in this case we can import Fetch Simulator as fetch (lowercase), and then use fetch.setRoutes(). 
+```js
+const fetch = require('fetch-simulator');
+const myRoutes = require('./routes.js');
+
+Fetch.setRoutes(myRoutes);
+```
