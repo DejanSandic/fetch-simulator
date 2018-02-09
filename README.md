@@ -159,6 +159,9 @@ fetch.addRoute('/user', {
 });
 ```
 In this case we will wait 5 seconds for our fake server to send the response for GET request and 1 second for POST request.
+
+<br />
+
 Fetch Simulator has default maximum wait limit at 20 seconds or 20000 ms. If you by any chance want to raise or lower this limit, you can use:
 ```js
 fetch.setTimeout(50000) // Limit is now 50 seconds
@@ -192,18 +195,19 @@ fetch('/users')
 To simulate this behavior, you can use set expected property's on the response object. We do this with the 'expect' property:
 ```js
 fetch.addRoute('/user', {
-    response: {
-      get: '',
-      post: {
-          message: 'New user has been created',
-          user: {name: 'Jane', lastName: 'Doe'}
-      }
+    get: {
+        response: '',
+        expect: {status: 404, error: 'That user is not found in the database'},
+        wait: 5000
     },
-    expect: {
-      get: {status: 404, error: 'That user is not found in the database'},
-      post: {status: 200, statusText: 'OK'}
-    },
-    wait: 5000
+    post: {
+        response: {
+            message: 'New user has been created',
+            user: {name: 'Jane', lastName: 'Doe'}
+        },
+        expect: {status: 200, statusText: 'OK'},
+        wait: 5000
+    }
 });
 ```
 In this case if we make GET request, response will look like this:
@@ -211,7 +215,8 @@ In this case if we make GET request, response will look like this:
 {
     response: '',
     status: 404,
-    error: 'That user is not found in the database'
+    error: 'That user is not found in the database',
+    url: '/user'
 }
 ```
 but if we make POST request on the same route, response will look like this:
@@ -222,10 +227,12 @@ but if we make POST request on the same route, response will look like this:
         user: {name: 'Jane', lastName: 'Doe'}
     },
     status: 200,
-    statusText: 'OK'
+    statusText: 'OK',
+    url: '/user'
 }
 ```
 <br />
+Notice how our response object automatically gets url property.
 
 
 <a id="removing-routes"></a>
