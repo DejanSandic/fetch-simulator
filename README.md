@@ -62,8 +62,8 @@ We can simulate this response with Fetch Simulator and return the same result.
 const fetch = require('fetch-simulator');
 
 fetch.addRoute('https://somekindofserver.com/location/miami', {
-    response: {
-        get: 'Miami, Florida, USA'
+    get: {
+        response: 'Miami, Florida, USA'
     }
 });
 
@@ -85,8 +85,8 @@ Using Fetch Simulator in the React or other front end library's is little bit di
 import Fetch from fetch-simulator;
 
 Fetch.addRoute('https://somekindofserver.com/location/miami', {
-    response: {
-        get: 'Miami, Florida, USA'
+    get: {
+        response: 'Miami, Florida, USA'
     }
 });
 
@@ -110,12 +110,14 @@ In order for the Fetch Simulator to get the response from specific route, we fir
 const fetch = require('fetch-simulator');
 
 fetch.addRoute('/user', {
-    response: {
-      get: {name: 'John', lastName: 'Doe'},
-      post: {
-          message: 'New user has been created',
-          user: {name: 'Jane', lastName: 'Doe'}
-      }
+    get: {
+        response: {name: 'John', lastName: 'Doe'}
+    },
+    post: {
+        response: {
+            message: 'New user has been created',
+            user: {name: 'Jane', lastName: 'Doe'}
+        }
     }
 });
 ```
@@ -143,21 +145,33 @@ fetch('/user', {method: 'POST'})
 Usually when we are making HTTP requests, we don't get server's response right away. Usually there is delay which could last even for few seconds. To simulate this behavior, you can set the time it would take for your fetch call to receive data. We do this with the 'wait' property:
 ```js
 fetch.addRoute('/user', {
-    response: {
-      get: {name: 'John', lastName: 'Doe'},
-      post: {
-          message: 'New user has been created',
-          user: {name: 'Jane', lastName: 'Doe'}
-      }
+    get: {
+        response: {name: 'John', lastName: 'Doe'},
+        wait: 5000
     },
-    wait: 5000
+    post: {
+        response: {
+            message: 'New user has been created',
+            user: {name: 'Jane', lastName: 'Doe'}
+        },
+        wait: 1000
+    }
 });
 ```
-In this case we will wait 5 seconds for our fake server to send the response.
+In this case we will wait 5 seconds for our fake server to send the response for GET request and 1 second for POST request.
 Fetch Simulator has default maximum wait limit at 20 seconds or 20000 ms. If you by any chance want to raise or lower this limit, you can use:
 ```js
 fetch.setTimeout(50000) // Limit is now 50 seconds
 fetch.setTimeout(1000) // Limit is now 1 second
+```
+
+You can check current timeout limit with fetch.getTimeout() method.
+```js
+let wait = fetch.getTimeout();
+
+if (wait < 50000) {
+  fetch.setTimeout(50000);
+}
 ```
 
 #### Additional response properties
