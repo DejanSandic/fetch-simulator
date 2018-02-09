@@ -254,24 +254,20 @@ Next example shows how we can create separate routes file and use it in our reac
 import Fetch from 'fetch-js';
 
 Fetch.addRoute('/users', {
-    response: {
-        get: ['John Doe', 'Jand Doe', 'Bruce Wayne']
+    get: {
+        response: ['John Doe', 'Jand Doe', 'Bruce Wayne'],
+        expect: {status: 200, statusText: 'OK'},
+        wait: 3000
     }
-    expect: {
-        get: {status: 200, statusText: 'OK'}
-    },
-    wait: 3000
 });
 
 Fetch.addRoute('/user', {
-    response: {
-        post: {
+    post: {
+        response: {
             message: 'New user created',
             user: 'Mr Spock'
-        }
-    }
-    expect: {
-        post: {status: 200, statusText: 'OK'}
+        },
+        expect: {status: 200, statusText: 'OK'}
     }
 });
 
@@ -298,7 +294,7 @@ class Test extends Component () {
     }
 
     componentDidMount(){
-        fetch('/users', {method: 'POST'})
+        fetch('/users', {method: 'GET'})
             .then((res) => res.json())
             .then((res) => {
                 this.setState({
