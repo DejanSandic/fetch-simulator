@@ -15,7 +15,7 @@ Lightweight module for simulation of HTTP requests with the fetch API.
 
 <a id="description"></a>
 ## Description
-With the Fetch Simulator you can simulate server responses without modifying you fetch API calls. This is really useful during development process when you don't want to make real HTTP requests to stress your server, or if you don't have server yet but you work on part of your app which depends of the server response. You can set exact data you want to receive from your simulated server as well as the time you want to wait to get your response. You don't have to replace your fetch calls with some kind of test functions, just import Fetch Simulator and you can use it. When you are ready to connect to the real server, you just remove it from your project.
+With the Fetch Simulator, you can simulate server responses without modifying you fetch API calls. This is really useful during development process when you don't want to make real HTTP requests to stress your server, or if you don't have a server yet but you work on part of your app which depends on the server response. You can set exact data you want to receive from your simulated server as well as the time you want to wait to get your response. You don't have to replace your fetch calls with some kind of test functions, just import Fetch Simulator and you can use it. When you are ready to connect to the real server, you just remove it from your project.
 
 <br />
 
@@ -43,7 +43,7 @@ const fetch = require('fetch-simulator');
 
 <a id="how-does-it-work"></a>
 ## How does it work?
-Lets say you are using fetch API to fetch some data from the geocode server with the GET request. Your code would look like this:
+Let's say you are using fetch API to fetch some data from the geocode server with the GET request. Your code would look like this:
 ```js
 fetch('https://somekindofserver.com/location/miami')
   .then((response) => {
@@ -53,7 +53,7 @@ fetch('https://somekindofserver.com/location/miami')
     console.log(response);
   });
   
-  // Lets say in this case response is - Miami, Florida, USA
+  // Let's say in this case response is - Miami, Florida, USA
 ```
 We can simulate this response with Fetch Simulator and return the same result.
 
@@ -77,10 +77,10 @@ fetch('https://somekindofserver.com/location/miami')
   
   // Now we will get the same result, but this time from the route we created - Miami, Florida, USA
 ```
-You noticed we called .json() method on our responce, but we didnt set it, this is because Fetch Simulator automatically adds this method to our response, more about this you can read in the methods section.
+You noticed we called .json() method on our response, but we didn't set it, this is because Fetch Simulator automatically adds this method to our response, more about this you can read in the methods section.
 
 #### ReactJS
-Using Fetch Simulator in the React or other front end library's is little bit different. Since React already has fetch API, we need to override it. For that reason we import Fetch Simulator wit capital F, and after that we can replace original fetch with .use() method.
+Using Fetch Simulator in the React or other front-end library's is a little bit different. Since React already has fetch API, we need to override it. For that reason, we import Fetch Simulator wit capital F, and after that, we can replace original fetch with .use() method.
 ```js
 import Fetch from fetch-simulator;
 
@@ -142,7 +142,7 @@ fetch('/user', {method: 'POST'})
 ```
 
 #### Delaying the response
-Usually when we are making HTTP requests, we don't get server's response right away. Usually there is delay which could last even for few seconds. To simulate this behavior, you can set the time it would take for your fetch call to receive data. We do this with the 'wait' property:
+Usually, when we are making HTTP requests, we don't get server's response right away. Usually, there is a delay which could last even for few seconds. To simulate this behavior, you can set the time it would take for your fetch call to receive data. We do this with the 'wait' property:
 ```js
 fetch.addRoute('/user', {
     get: {
@@ -178,7 +178,7 @@ if (wait < 50000) {
 ```
 
 #### Additional response properties
-Sometimes your logic in side of the fetch call depends on certin expected parameters on the response object, for example:
+Sometimes your logic inside of the fetch call depends on certain expected parameters on the response object, for example:
 ```js
 fetch('/users')
     .then((res) => {
@@ -246,7 +246,7 @@ fetch.removeRoute('/users');
 
 <a id="external-routes"></a>
 ## Creating and importing external routes
-It would be really messy if you would create routes in the same file in which you use your fetch calls. With Fetch Simulator, you can create routes in one file, export them, then import and use them in other file.
+It would be really messy if you would create routes in the same file in which you use your fetch calls. With Fetch Simulator, you can create routes in one file, export them, then import and use them in another file.
 Next example shows how we can create separate routes file and use it in our react app.
 ```js
 // FILE NAME = routes.js
@@ -276,7 +276,7 @@ let routes = Fetch.getRoutes();
 
 export default routes;
 ```
-Notice how we used Fetch.getRoutes() to create a copy of our routes object and store it to the variable. We exported that variable so we can import and use it in other file. After we import the routes, we can pass them to our fetch system by using Fetch.setRoutes().
+Notice how we used Fetch.getRoutes() to create a copy of our routes object and store it to the variable. We exported that variable so we can import and use it in another file. After we import the routes, we can pass them to our fetch system by using Fetch.setRoutes().
 ```js
 // FILE NAME = index.js
 
@@ -312,7 +312,7 @@ In this case text of the h1 tag will be 'Batman', but after 3 seconds when fetch
 
 <br />
 
-In this example we used Fetch.setRoutes() to pass our previously created routes to the Fetch Simulator, and after that we used Fetch.use() to replace the fetch API with our Fetch Simulator. We can simplify this by passing our previously created routes directly to Fetch.use() and that way we don't have to use Fetch.setRoutes().
+In this example, we used Fetch.setRoutes() to pass our previously created routes to the Fetch Simulator, and after that, we used Fetch.use() to replace the fetch API with our Fetch Simulator. We can simplify this by passing our previously created routes directly to Fetch.use() and that way we don't have to use Fetch.setRoutes().
 ```js
 import Fetch from 'fetch-simulator';
 import myRoutes from './routes.js';
