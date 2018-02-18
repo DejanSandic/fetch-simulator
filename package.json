@@ -1,10 +1,10 @@
 {
   "name": "fetch-simulator",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Lightweight module for simulation of HTTP requests with the fetch API",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha tests/*.test.js"
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,9 @@
     "xhr"
   ],
   "author": "Dejan Sandic - dejansandic.com",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "expect": "^22.3.0",
+    "mocha": "^5.0.1"
+  }
 }
